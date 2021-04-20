@@ -8,7 +8,7 @@ export default function Home() {
       </Head>
 
       <main>
-        Início
+        <h1>Podcasts</h1>
       </main>
     </div>
   )
