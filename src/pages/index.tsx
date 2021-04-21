@@ -9,7 +9,13 @@ import { convertDurationToTimeString } from '../utils/convertDurationToTimeStrin
 type Episode = {
   id: string;
   title: string;
+  thumbnail: string;
+  description: string;
   members: string;
+  duration: number;
+  durationAsString: string;
+  publishedAt: string;
+  url: string;
 }
 
 interface HomeProps {
@@ -39,14 +45,15 @@ export const getStaticProps: GetStaticProps = async () => {
     }
   })
 
-  const episodes = data.map(episode => {
+  const episodes = data.map((episode): Episode => {
     return {
       id: episode.id,
       title: episode.title,
       thumbnail: episode.thumbnail,
       members: episode.members,
       publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
-      duration: convertDurationToTimeString(Number(episode.file.duration)),
+      durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
+      duration: Number(episode.file.duration),
       description: episode.description,
       url: episode.file.url
     }
