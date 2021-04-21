@@ -12,11 +12,15 @@
 .latestEpisodes {
   ul {
     list-style: none;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    display: flex;
+    flex-flow: row wrap;
     gap: 1.5rem;
 
     li {
+      width: 100%;
+      min-width: 550px;
+      width: 600px;
+      flex: 1;
       background: var(--white);
       border: 1px solid var(--gray-100);
       padding: 1.25rem;
