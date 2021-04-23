@@ -58,6 +58,14 @@ export function Player() {
       clearPlayerState()
     }
   }
+
+  function handlePlaybackRate() {
+    if (audioRef.current.playbackRate >= 2) {
+      audioRef.current.playbackRate = .5
+    } else {
+      audioRef.current.playbackRate += .5
+    }
+  }
   
   return (
     <div className={styles.playerContainer}>
@@ -80,7 +88,6 @@ export function Player() {
 
       <footer className={!episode ? styles.empty : ''}>
         <div className={styles.progress}>
-          <span>{convertDurationToTimeString(progress)}</span>
           <div className={styles.slider}>
             { episode ? (
               <Slider
@@ -95,7 +102,15 @@ export function Player() {
               <div className={styles.emptySlider} />
             )}
           </div>
-          <span>{convertDurationToTimeString(episode?.duration ?? 0)}</span>
+          <div className={styles.progressInfos}>
+            <span>{convertDurationToTimeString(progress)}</span>
+
+            <button type="button" disabled={!episode} onClick={handlePlaybackRate}>
+              <p>{audioRef.current.playbackRate}x</p>
+            </button>
+
+            <span>{convertDurationToTimeString(episode?.duration ?? 0)}</span>
+          </div>
         </div>
 
         { episode && (
