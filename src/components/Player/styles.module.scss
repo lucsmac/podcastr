@@ -118,6 +118,14 @@
       filter: brightness(1);
     }
 
+    &.isActive {
+      filter: brightness(0.8) invert(0.35) sepia(1) saturate(6) hue-rotate(60deg);
+    }
+
+    &.isActive:hover {
+      filter: brightness(1) invert(0.35) sepia(1) saturate(6) hue-rotate(60deg);
+    }
+
     &.playButton {
       width: 4rem;
       height: 4rem;
