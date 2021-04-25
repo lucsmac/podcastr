@@ -106,7 +106,7 @@ export function Player() {
             <span>{convertDurationToTimeString(progress)}</span>
 
             <button type="button" disabled={!episode} onClick={handlePlaybackRate}>
-              <p>{audioRef.current.playbackRate}x</p>
+              <p>{audioRef.current?.playbackRate || 1}x</p>
             </button>
 
             <span>{convertDurationToTimeString(episode?.duration ?? 0)}</span>

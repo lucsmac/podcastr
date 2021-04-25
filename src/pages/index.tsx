@@ -3,6 +3,9 @@ import Image from 'next/image'
 import Head from 'next/head'
 import Link from 'next/link'
 
+import Prismic from '@prismicio/client'
+import { Client } from '../services/prismic';
+
 import { format, parseISO } from 'date-fns';
 import ptBR from 'date-fns/locale/pt-BR';
 
@@ -123,24 +126,24 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const { data } = await api.get('episodes', {
-    params: {
-      _limit: 12,
-      _sort: 'published_at',
-      _order: 'desc'
+  const data = await Client.query(
+    Prismic.Predicates.at('document.type', 'episode'),
+    { 
+      pageSize : 12,
+      orderings : '[document.first_publication_date]'
     }
-  })
+  )
 
-  const episodes = data.map((episode): Episode => {
+  const episodes = data.results.map((episode): Episode => {
     return {
-      id: episode.id,
-      title: episode.title,
-      thumbnail: episode.thumbnail,
-      members: episode.members,
-      publishedAt: format(parseISO(episode.published_at), 'd MMM yy', { locale: ptBR }),
-      durationAsString: convertDurationToTimeString(Number(episode.file.duration)),
-      duration: Number(episode.file.duration),
-      url: episode.file.url
+      id: episode.uid,
+      title: episode.data.title[0].text,
+      thumbnail: episode.data.thumbnail.url,
+      members: episode.data.members,
+      publishedAt: format(parseISO(episode.data.published_at), 'd MMM yy', { locale: ptBR }),
+      durationAsString: convertDurationToTimeString(Number(episode.data.file[0].duration)),
+      duration: Number(episode.data.file[0].duration),
+      url: episode.data.file[0].url.url
     }
   })
 
