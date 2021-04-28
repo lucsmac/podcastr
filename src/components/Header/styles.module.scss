@@ -19,4 +19,22 @@
     margin-left: auto;
     text-transform: capitalize;
   }
+
+  @media screen and (max-width: 768px) {
+    padding: 2rem;
+    height: 5rem;
+
+    p {
+      margin-left: 1rem;
+      padding-left: 1rem;
+    }
+
+    span {
+      display: none;
+    }
+
+    img {
+      max-width: 7rem;
+    }
+  }
 }

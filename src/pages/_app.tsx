@@ -9,10 +9,10 @@ function MyApp({ Component, pageProps }) {
   return (
     <div className={styles.wrapper}>
       <PlayerProvider>
-        <main>
+        <div className={styles.content}>
           <Header />
           <Component {...pageProps} />
-        </main>
+        </div>
         <Player />
       </PlayerProvider>
     </div>
