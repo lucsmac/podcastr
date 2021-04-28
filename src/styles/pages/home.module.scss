@@ -7,6 +7,11 @@
     margin-top: 3rem;
     margin-bottom: 1.5rem;
   }
+
+  @media screen and (max-width: 768px) {
+    height: auto;
+    padding: 0 2rem;
+  }
 }
 
 .latestEpisodes {
@@ -34,6 +39,17 @@
         width: 6rem;
         height: 6rem;
         border-radius: 1rem;
+      }
+
+      @media screen and (max-width: 768px) {
+        flex-direction: column;
+        min-width: auto;
+        max-width: 100%;
+        align-items: initial;
+
+        .episodeThumbnail {
+          display: none;
+        }
       }
     }
 
@@ -85,6 +101,10 @@
             transform: translate(-50%, -50%);
           }
         }
+      }
+
+      @media screen and (max-width: 768px) {
+        margin-left: 0;
       }
     }
 

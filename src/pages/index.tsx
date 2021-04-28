@@ -48,7 +48,7 @@ export default function Home({ latestEpisodes, allEpisodes }: HomeProps) {
           <ul>
             { latestEpisodes.map((episode, index) => (
               <li key={episode.id}>
-                <div style={{ width: 96 }}>
+                <div className={styles.episodeThumbnail} style={{ width: 96 }}>
                   <Image
                     width={192}
                     height={192}
